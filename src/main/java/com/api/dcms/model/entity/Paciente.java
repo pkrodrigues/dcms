@@ -20,5 +20,5 @@ public class Paciente extends Pessoa{
     private Convenio convenio;
 
 
-    
+
 }

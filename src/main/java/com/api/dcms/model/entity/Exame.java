@@ -3,6 +3,8 @@ package com.api.dcms.model.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Time;
+import java.util.Date;
 
 @Entity
 @Data
@@ -14,7 +16,8 @@ public class Exame {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idExame;
-
+    private Date data;
+    private Time horario;
     private String nome;
     private String descricao;
     private double valor;
