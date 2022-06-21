@@ -3,7 +3,6 @@ package com.api.dcms.model.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.persistence.MappedSuperclass;
 
 @Entity
 @Data

@@ -1,13 +1,19 @@
 package com.api.dcms.model.entity;
 
-import com.api.dcms.model.entity.Convenio;
-import com.api.dcms.model.entity.Medico;
-import com.api.dcms.model.entity.Paciente;
-import lombok.*;
-
-import javax.persistence.*;
 import java.sql.Time;
-import java.util.*;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
