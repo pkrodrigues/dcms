@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -28,7 +29,7 @@ public class PacienteService {
 
     public void validar(Paciente paciente) {
         if (paciente.getNome() == null || paciente.getNome().trim().equals("")) {
-            throw new RegraNegocioException("Nome inválido");
+            throw new RegraNegocioException("Nome inválido"+paciente.getNome()+" "+paciente.getTelefone());
         }
     }
 
@@ -36,5 +37,10 @@ public class PacienteService {
     public Paciente salvar(Paciente paciente) {
         validar(paciente);
         return repository.save(paciente);
+    }
+    @Transactional
+    public void excluir(Paciente paciente) {
+        Objects.requireNonNull(paciente.getId());
+        repository.delete(paciente);
     }
 }

@@ -1,24 +1,33 @@
 package com.api.dcms.model.entity;
 
-import lombok.*;
-
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
-@Getter
-@Setter
+@ToString
 
 
-public class Paciente extends Pessoa{
+
+public class Paciente extends Pessoa {
 
     @ManyToOne
     private Convenio convenio;
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> code-pk
 }
+
+
+
