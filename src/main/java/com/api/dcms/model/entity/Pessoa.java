@@ -11,7 +11,7 @@ import java.util.Date;
 @MappedSuperclass
 @Getter
 @Setter
-@Data
+
 
 public abstract class Pessoa {
     @Id
@@ -26,6 +26,7 @@ public abstract class Pessoa {
     private String telefone;
     private String email;
     private Long cep;
+    private String uf;
     private String rua;
     private Long numeroResidencia;
     private String complemento;

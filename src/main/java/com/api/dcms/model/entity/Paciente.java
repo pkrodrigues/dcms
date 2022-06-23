@@ -22,11 +22,6 @@ public class Paciente extends Pessoa {
     @ManyToOne
     private Convenio convenio;
 
-
-<<<<<<< HEAD
-
-=======
->>>>>>> code-pk
 }
 
 

@@ -1,7 +1,7 @@
 package com.api.dcms.service;
 
 import com.api.dcms.exception.RegraNegocioException;
-import com.api.dcms.model.entity.Paciente;
+import com.api.dcms.model.entity.*;
 import com.api.dcms.model.repository.PacienteRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +19,10 @@ public class PacienteService {
         this.repository = repository;
     }
 
-    public List<Paciente> getPaciente() {
+    public List<Paciente> getPacientes() {
         return repository.findAll();
     }
-    
+
     public Optional<Paciente> getPacienteById(Long id) {
         return repository.findById(id);
     }
