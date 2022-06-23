@@ -13,18 +13,18 @@
 ## :rocket: Rodando o projeto
 Para rodar o repositório é necessário clonar o mesmo, dar o seguinte comando para iniciar o projeto:
 
-### - [ ] *Clone este repositório:* 
+- [ ] *Clone este repositório:* 
 
 ```
 $ git clone https://github.com/pkrodrigues/dcms.git
 ```
-### -[ ] *Crie um banco de dados no postgree de nome:*
+- [ ] *Crie um banco de dados no postgree de nome:*
 ```
 dcms
 ```
-### - [ ] *Abra o projeto na sua ide preferida*
-### - [ ] *Execute o programa*
-### - [ ] *O servidor inciará na porta:8080 - acesse <http://localhost:8080>*
+- [ ] *Abra o projeto na sua ide preferida*
+- [ ] *Execute o programa*
+- [ ] *O servidor inciará na porta:8080 - acesse <http://localhost:8080>*
 
 ---
 
