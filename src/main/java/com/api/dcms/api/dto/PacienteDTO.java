@@ -30,12 +30,7 @@ public class PacienteDTO {
     public static PacienteDTO create(Paciente paciente){
         ModelMapper modelMapper = new ModelMapper();
         PacienteDTO dto = modelMapper.map(paciente, PacienteDTO.class);
-        dto.rua = paciente.getRua();
-        dto.numeroResidencia = paciente.getNumeroResidencia();
-        dto.complemento = paciente.getComplemento();
-        dto.bairro = paciente.getBairro();
-        dto.cidade = paciente.getCidade();
-        dto.cep = paciente.getCep();
+        dto.getIdConvenio();
         return dto;
     }
 }
