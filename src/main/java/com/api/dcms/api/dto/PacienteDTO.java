@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PacienteDTO {
-
+    private Long id;
     private String nome;
     private Date dataNasc;
     private String rg;
@@ -19,6 +19,7 @@ public class PacienteDTO {
     private String sexo;
     private String telefone;
     private String email;
+    private String uf;
     private Long cep;
     private String rua;
     private Long numeroResidencia;
