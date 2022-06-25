@@ -48,8 +48,8 @@ dcms
       </a>
     </td>
     <td align="center">
-      <a href="http://github.com/tathialima">
-        <img style="border-radius:20px;" src="" width="100px;" alt="Foto de Tathia Lima no Github"/><br>
+      <a href="https://github.com/Tathia-Lima">
+        <img style="border-radius:20px;" src="https://avatars.githubusercontent.com/u/80372910?v=4" width="100px;" alt="Foto de Tathia Lima no Github"/><br>
         <sub>
           <b>Tathia Lima</b>
         </sub>
