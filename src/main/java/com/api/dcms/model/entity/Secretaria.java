@@ -4,30 +4,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-@ToString
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 
-
-
-public class Paciente extends Pessoa {
+public class Secretaria extends Colaborador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPaciente;
-    @ManyToOne
-    private Convenio convenio;
-
+    private Long idSecretaria;
+    
 }
-
-
-

@@ -1,33 +1,23 @@
 package com.api.dcms.model.entity;
 
+import lombok.*;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-@ToString
-
-
-
-public class Paciente extends Pessoa {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Funcionario extends Colaborador{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPaciente;
+    private Long idFuncionario;
+    private String tipoContratacao;
+
     @ManyToOne
-    private Convenio convenio;
-
+    private Cargo cargo;
 }
-
-
-

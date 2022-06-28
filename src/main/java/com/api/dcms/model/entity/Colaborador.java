@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Table;
 import java.util.Date;
 
 

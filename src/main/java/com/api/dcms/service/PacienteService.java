@@ -23,8 +23,8 @@ public class PacienteService {
         return repository.findAll();
     }
 
-    public Optional<Paciente> getPacienteById(Long id) {
-        return repository.findById(id);
+    public Optional<Paciente> getPacienteById(Long idPaciente) {
+        return repository.findById(idPaciente);
     }
 
     public void validar(Paciente paciente) {
@@ -40,7 +40,7 @@ public class PacienteService {
     }
     @Transactional
     public void excluir(Paciente paciente) {
-        Objects.requireNonNull(paciente.getId());
+        Objects.requireNonNull(paciente.getIdPaciente());
         repository.delete(paciente);
     }
 }

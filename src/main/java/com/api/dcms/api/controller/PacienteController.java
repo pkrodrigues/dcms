@@ -83,7 +83,7 @@ public class PacienteController {
         }
         try {
             Paciente paciente = converter(dto);
-            paciente.setId(id);
+            paciente.setIdPaciente(id);
             service.salvar(paciente);
             return ResponseEntity.ok(paciente);
         } catch (RegraNegocioException e) {
@@ -106,3 +106,4 @@ public class PacienteController {
     }
 
 }
+        

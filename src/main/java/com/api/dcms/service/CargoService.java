@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -22,19 +23,24 @@ public class CargoService {
         return repository.findAll();
     }
 
-    public Optional<Cargo> getCargoById(Long id) {
-        return repository.findById(id);
+    public Optional<Cargo> getCargoById(Long idCargo) {
+        return repository.findById(idCargo);
     }
 
-    public void Validar(Cargo cargo) {
+    public void validar(Cargo cargo) {
         if (cargo.getNomeCargo() == null || cargo.getNomeCargo().trim().equals("")) {
             throw new RegraNegocioException("Cargo inválido");
         }
     }
 
     @Transactional
-    public Cargo Salvar(Cargo cargo){
-        Validar(cargo);
+    public Cargo salvar(Cargo cargo){
+        validar(cargo);
         return repository.save(cargo);
+    }
+    @Transactional
+    public void excluir(Cargo cargo) {
+        Objects.requireNonNull(cargo.getIdCargo());
+        repository.delete(cargo);
     }
 }

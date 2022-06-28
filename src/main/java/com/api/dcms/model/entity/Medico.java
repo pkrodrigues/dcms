@@ -10,8 +10,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 
 public class Medico extends Colaborador {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idMedico;
     private String crm;
     private String especialidade;
+   
 
 }

@@ -14,10 +14,7 @@ import java.util.Date;
 
 
 public abstract class Pessoa {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    
     private String nome;
     private Date dataNasc;
     private String rg;
