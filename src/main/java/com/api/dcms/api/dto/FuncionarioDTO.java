@@ -31,7 +31,7 @@ public class FuncionarioDTO {
     private  Date data_saida;
     private double salario;
     private String tipo_contratacao;
-    private int cargo_id_cargo;
+    private Long idCargo;
 
 
     public static FuncionarioDTO create(Funcionario funcionario) {

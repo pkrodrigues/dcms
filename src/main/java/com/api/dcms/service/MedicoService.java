@@ -4,7 +4,6 @@ import com.api.dcms.exception.RegraNegocioException;
 import com.api.dcms.model.entity.Medico;
 import com.api.dcms.model.repository.MedicoRepository;
 
-import io.netty.util.collection.LongObjectHashMap;
 
 import org.springframework.stereotype.Service;
 
