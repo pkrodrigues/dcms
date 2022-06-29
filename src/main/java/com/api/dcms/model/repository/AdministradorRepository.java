@@ -1,15 +1,15 @@
 package com.api.dcms.model.repository;
 
 import com.api.dcms.model.entity.Cargo;
-import com.api.dcms.model.entity.Funcionario;
+import com.api.dcms.model.entity.Administrator;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
+public interface AdministradorRepository extends JpaRepository<Administrator, Long> {
 
-      List<Funcionario> findByCargo(Optional<Cargo> cargo);
+      List<Administrator> findByCargo(Optional<Cargo> cargo);
 }
 
 

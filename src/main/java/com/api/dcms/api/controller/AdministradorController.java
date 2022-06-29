@@ -16,44 +16,44 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.dcms.api.dto.FuncionarioDTO;
+import com.api.dcms.api.dto.AdministradorDTO;
 import com.api.dcms.exception.RegraNegocioException;
 import com.api.dcms.model.entity.Cargo;
-import com.api.dcms.model.entity.Funcionario;
-import com.api.dcms.service.FuncionarioService;
+import com.api.dcms.model.entity.Administrator;
+import com.api.dcms.service.AdministradorService;
 import com.api.dcms.service.CargoService;
 
 import lombok.RequiredArgsConstructor;
 
 
 @RestController
-@RequestMapping("/api/v1/funcionario")
+@RequestMapping("/api/v1/administrador")
 @RequiredArgsConstructor
 
-public class FuncionarioController {
+public class AdministradorController {
 
-    private final FuncionarioService service;
+    private final AdministradorService service;
     private final CargoService cargoService;
 
     @GetMapping()
     public ResponseEntity get() {
-        List<Funcionario> funcionario = service.getFuncionario();
-        return ResponseEntity.ok(funcionario.stream().map(FuncionarioDTO::create).collect(Collectors.toList()));
+        List<Administrator> funcionario = service.getAdministrador();
+        return ResponseEntity.ok(funcionario.stream().map(AdministradorDTO::create).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity get(@PathVariable("id") Long id) {
-        Optional<Funcionario> funcionario = service.getFuncionarioById(id);
+        Optional<Administrator> funcionario = service.getAdministradorById(id);
         if (!funcionario.isPresent()) {
             return new ResponseEntity("Funcionário não encontrado", HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(funcionario.map(FuncionarioDTO::create));
+        return ResponseEntity.ok(funcionario.map(AdministradorDTO::create));
     }
 
     @PostMapping()
-    public ResponseEntity post(FuncionarioDTO dto) {
+    public ResponseEntity post(AdministradorDTO dto) {
         try {
-            Funcionario funcionario = converter(dto);
+            Administrator funcionario = converter(dto);
             funcionario = service.salvar(funcionario);
             return new ResponseEntity(funcionario, HttpStatus.CREATED);
         } catch (RegraNegocioException e) {
@@ -64,13 +64,13 @@ public class FuncionarioController {
 
 
     @PutMapping("{id}")
-    public ResponseEntity atualizar(@PathVariable("id") Long id, FuncionarioDTO dto) {
-        if (!service.getFuncionarioById(id).isPresent()) {
+    public ResponseEntity atualizar(@PathVariable("id") Long id, AdministradorDTO dto) {
+        if (!service.getAdministradorById(id).isPresent()) {
             return new ResponseEntity("Funcionário não encontrado", HttpStatus.NOT_FOUND);
         }
         try {
-            Funcionario funcionario = converter(dto);
-            funcionario.setIdFuncionario(id);
+            Administrator funcionario = converter(dto);
+            funcionario.setIdAdministrador(id);
             service.salvar(funcionario);
             return ResponseEntity.ok(funcionario);
         } catch (RegraNegocioException e) {
@@ -80,7 +80,7 @@ public class FuncionarioController {
 
     @DeleteMapping("{id}")
     public ResponseEntity excluir(@PathVariable("id") Long id) {
-        Optional<Funcionario> funcionario = service.getFuncionarioById(id);
+        Optional<Administrator> funcionario = service.getAdministradorById(id);
         if (!funcionario.isPresent()) {
             return new ResponseEntity("Funcionário não encontrado", HttpStatus.NOT_FOUND);
         }
@@ -92,11 +92,11 @@ public class FuncionarioController {
         }
     }
 
-    public Funcionario converter(FuncionarioDTO dto) {
+    public Administrator converter(AdministradorDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
-        Funcionario funcionario = modelMapper.map(dto, Funcionario.class);
-        if (dto.getId() != null) {
-            Optional<Cargo> cargo = cargoService.getCargoById(dto.getId());
+        Administrator funcionario = modelMapper.map(dto, Administrator.class);
+        if (dto.getIdAdministrador() != null) {
+            Optional<Cargo> cargo = cargoService.getCargoById(dto.getIdAdministrador());
             if (!cargo.isPresent()) {
                 funcionario.setCargo(null);
             } else {

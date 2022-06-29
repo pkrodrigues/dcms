@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.api.dcms.api.dto.FuncionarioDTO;
+import com.api.dcms.api.dto.AdministradorDTO;
 import com.api.dcms.api.dto.MedicoDTO;
 import com.api.dcms.model.entity.Medico;
 import org.springframework.http.HttpStatus;
@@ -21,11 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.dcms.api.dto.CargoDTO;
-import com.api.dcms.service.FuncionarioService;
+import com.api.dcms.service.AdministradorService;
 import com.api.dcms.service.CargoService;
 import com.api.dcms.exception.RegraNegocioException;
 import com.api.dcms.model.entity.Cargo;
-import com.api.dcms.model.entity.Funcionario;
+import com.api.dcms.model.entity.Administrator;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,7 +36,7 @@ import lombok.RequiredArgsConstructor;
 public class CargoController {
 
     private final CargoService service;
-    private final FuncionarioService funcionarioService;
+    private final AdministradorService funcionarioService;
 
 
     @GetMapping()
@@ -56,13 +56,13 @@ public class CargoController {
     }
 
     @GetMapping("{id}/funcionario")
-    public ResponseEntity getFuncionario(@PathVariable("id") Long id) {
+    public ResponseEntity getAdministrador(@PathVariable("id") Long id) {
         Optional<Cargo> cargo = service.getCargoById(id);
         if (!cargo.isPresent()) {
             return new ResponseEntity("Cargo não encontrado", HttpStatus.NOT_FOUND);
         }
-        List<Funcionario> funcionario = funcionarioService.getFuncionarioByCargo(cargo);
-        return ResponseEntity.ok(funcionario.stream().map(FuncionarioDTO::create).collect(Collectors.toList()));
+        List<Administrator> funcionario = funcionarioService.getAdministradorByCargo(cargo);
+        return ResponseEntity.ok(funcionario.stream().map(AdministradorDTO::create).collect(Collectors.toList()));
     }
 
     @PostMapping()

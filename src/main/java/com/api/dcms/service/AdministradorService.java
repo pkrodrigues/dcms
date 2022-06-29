@@ -2,8 +2,8 @@ package com.api.dcms.service;
 
 import com.api.dcms.exception.RegraNegocioException;
 import com.api.dcms.model.entity.Cargo;
-import com.api.dcms.model.entity.Funcionario;
-import com.api.dcms.model.repository.FuncionarioRepository;
+import com.api.dcms.model.entity.Administrator;
+import com.api.dcms.model.repository.AdministradorRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -13,40 +13,40 @@ import java.util.Optional;
 
 
 @Service
-public class FuncionarioService {
+public class AdministradorService {
 
-    private FuncionarioRepository repository;
+    private AdministradorRepository repository;
 
-    public FuncionarioService(FuncionarioRepository repository) {
+    public AdministradorService(AdministradorRepository repository) {
         this.repository = repository;
     }
 
-    public List<Funcionario> getFuncionario() {
+    public List<Administrator> getAdministrador() {
         return repository.findAll();
     }
 
-    public Optional<Funcionario> getFuncionarioById(Long id) {
+    public Optional<Administrator> getAdministradorById(Long id) {
         return repository.findById(id);
     }
 
-    public List<Funcionario> getFuncionarioByCargo(Optional<Cargo> cargo) {
+    public List<Administrator> getAdministradorByCargo(Optional<Cargo> cargo) {
         return repository.findByCargo(cargo);
 
     }
 
     @Transactional
-    public Funcionario salvar(Funcionario funcionario) {
+    public Administrator salvar(Administrator funcionario) {
         validar(funcionario);
         return repository.save(funcionario);
     }
 
     @Transactional
-    public void excluir(Funcionario funcionario) {
-        Objects.requireNonNull(funcionario.getIdFuncionario());
+    public void excluir(Administrator funcionario) {
+        Objects.requireNonNull(funcionario.getIdAdministrador());
         repository.delete(funcionario);
     }
 
-    public void validar(Funcionario funcionario) {
+    public void validar(Administrator funcionario) {
 
         if (funcionario.getNome() == null || funcionario.getNome().trim().equals("")) {
             throw new RegraNegocioException("Nome inválido");

@@ -1,6 +1,6 @@
 package com.api.dcms.api.dto;
 
-import com.api.dcms.model.entity.Funcionario;
+import com.api.dcms.model.entity.Administrator;
 import com.api.dcms.model.entity.Cargo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,8 +12,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class FuncionarioDTO {
-    private Long id;
+public class AdministradorDTO {
+    private Long idAdministrador;
     private String complemento;
     private String bairro;
     private Long cep;
@@ -34,9 +34,9 @@ public class FuncionarioDTO {
     private Long idCargo;
 
 
-    public static FuncionarioDTO create(Funcionario funcionario) {
+    public static AdministradorDTO create(Administrator funcionario) {
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(funcionario, FuncionarioDTO.class);
+        return modelMapper.map(funcionario, AdministradorDTO.class);
         }
     }
 
