@@ -42,4 +42,8 @@ public class ConvenioService {
         Objects.requireNonNull(convenio.getIdConvenio());
         repository.delete(convenio);
     }
+
+    public Optional<Convenio> getMedicoById(Long idMedico) {
+        return null;
+    }
 }

@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.dcms.api.dto.MedicoDTO;
 import com.api.dcms.exception.RegraNegocioException;
-import com.api.dcms.model.entity.Convenio;
 import com.api.dcms.model.entity.Medico;
 import com.api.dcms.service.ConvenioService;
 import com.api.dcms.service.MedicoService;
-
 
 import lombok.RequiredArgsConstructor;
 

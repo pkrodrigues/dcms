@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.dcms.api.dto.AdministradorDTO;
 import com.api.dcms.exception.RegraNegocioException;
-import com.api.dcms.model.entity.Cargo;
 import com.api.dcms.model.entity.Administrator;
+import com.api.dcms.model.entity.Cargo;
 import com.api.dcms.service.AdministradorService;
 import com.api.dcms.service.CargoService;
 

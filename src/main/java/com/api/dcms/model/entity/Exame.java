@@ -1,10 +1,23 @@
 package com.api.dcms.model.entity;
 
-import lombok.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-import javax.persistence.*;
-import java.sql.Time;
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Data
@@ -16,8 +29,9 @@ public class Exame {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idExame;
-    private Date data;
-    private Time horario;
+   
+    private LocalDate data;
+    private LocalTime horario;
     private String nome;
     private String descricao;
     private double valor;
@@ -25,7 +39,11 @@ public class Exame {
     private Paciente paciente;
     @ManyToOne
     private Medico medico;
-    private String convenio;
+    @ManyToOne
+    private Convenio convenio;
+    public boolean isPresent() {
+        return false;
+    }
 
 
 

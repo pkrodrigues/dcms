@@ -39,12 +39,7 @@ public class MedicoDTO {
     public static MedicoDTO create(Medico medico){
         ModelMapper modelMapper = new ModelMapper();
         MedicoDTO dto = modelMapper.map(medico, MedicoDTO.class);
-        dto.rua = medico.getRua();
-        dto.numero_residencia = medico.getNumeroResidencia();
-        dto.complemento = medico.getComplemento();
-        dto.bairro = medico.getBairro();
-        dto.cidade = medico.getCidade();
-        dto.cep = medico.getCep();
+        dto.getIdConvenio();
         return dto;
     }
 }
