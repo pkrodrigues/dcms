@@ -52,12 +52,12 @@ public class CargoController {
     }
 
     @GetMapping("{id}/funcionario")
-    public ResponseEntity getAdministrador(@PathVariable("id") Long id) {
+    public ResponseEntity getFuncionario(@PathVariable("id") Long id) {
         Optional<Cargo> cargo = service.getCargoById(id);
         if (!cargo.isPresent()) {
             return new ResponseEntity("Cargo não encontrado", HttpStatus.NOT_FOUND);
         }
-        List<Funcionario> funcionario = funcionarioService.getAdministradorByCargo(cargo);
+        List<Funcionario> funcionario = funcionarioService.getFuncionarioByCargo(cargo);
         return ResponseEntity.ok(funcionario.stream().map(FuncionarioDTO::create).collect(Collectors.toList()));
     }
 
