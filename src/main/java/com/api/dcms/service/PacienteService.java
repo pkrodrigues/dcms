@@ -3,6 +3,8 @@ package com.api.dcms.service;
 import com.api.dcms.exception.RegraNegocioException;
 import com.api.dcms.model.entity.*;
 import com.api.dcms.model.repository.PacienteRepository;
+import com.api.dcms.model.repository.ReceitaMedicaRepository;
+
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,6 +16,7 @@ import java.util.Optional;
 public class PacienteService {
 
     private PacienteRepository repository;
+    private ReceitaMedicaRepository receitaMedicaRepository;
 
     public PacienteService(PacienteRepository repository) {
         this.repository = repository;
@@ -26,6 +29,11 @@ public class PacienteService {
     public Optional<Paciente> getPacienteById(Long idPaciente) {
         return repository.findById(idPaciente);
     }
+
+    // public List<Paciente> getPacientesByReceitaMedica(Optional<ReceitaMedica> receitaMedica) {
+    //     return repository.findByReceitaMedica(receitaMedica);
+    // }
+    
 
     public void validar(Paciente paciente) {
         if (paciente.getNome() == null || paciente.getNome().trim().equals("")) {

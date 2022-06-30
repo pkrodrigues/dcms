@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.dcms.api.dto.AdministradorDTO;
+import com.api.dcms.api.dto.FuncionarioDTO;
 import com.api.dcms.api.dto.CargoDTO;
 import com.api.dcms.exception.RegraNegocioException;
-import com.api.dcms.model.entity.Administrator;
+import com.api.dcms.model.entity.Funcionario;
 import com.api.dcms.model.entity.Cargo;
-import com.api.dcms.service.AdministradorService;
+import com.api.dcms.service.FuncionarioService;
 import com.api.dcms.service.CargoService;
 
 import lombok.RequiredArgsConstructor;
@@ -32,7 +32,7 @@ import lombok.RequiredArgsConstructor;
 public class CargoController {
 
     private final CargoService service;
-    private final AdministradorService funcionarioService;
+    private final FuncionarioService funcionarioService;
 
 
     @GetMapping()
@@ -57,8 +57,8 @@ public class CargoController {
         if (!cargo.isPresent()) {
             return new ResponseEntity("Cargo não encontrado", HttpStatus.NOT_FOUND);
         }
-        List<Administrator> funcionario = funcionarioService.getAdministradorByCargo(cargo);
-        return ResponseEntity.ok(funcionario.stream().map(AdministradorDTO::create).collect(Collectors.toList()));
+        List<Funcionario> funcionario = funcionarioService.getAdministradorByCargo(cargo);
+        return ResponseEntity.ok(funcionario.stream().map(FuncionarioDTO::create).collect(Collectors.toList()));
     }
 
     @PostMapping()

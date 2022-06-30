@@ -36,7 +36,6 @@ public class ExameController {
 
     private final ExameService service;
     private final PacienteService pacienteService;
-    private final ExameService exameService;
     private final ConvenioService convenioService;
     private final MedicoService medicoService;
 

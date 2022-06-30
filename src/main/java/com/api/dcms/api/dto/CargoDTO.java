@@ -12,9 +12,9 @@ import org.modelmapper.ModelMapper;
 @AllArgsConstructor
 public class CargoDTO {
 
-    private int id_cargo;
-    private String descricao_cargo;
-    private String nome_cargo;
+    private int idCargo;
+    private String descricaoCargo;
+    private String nomeCargo;
 
 
     public static com.api.dcms.api.dto.CargoDTO create(Cargo cargo){

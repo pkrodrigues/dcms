@@ -20,6 +20,6 @@ public class ReceitaMedica {
     private Medico medico;
     @ManyToOne
     private Paciente paciente;
-    private Date dtGeracaoReceita;
-    private String presquicao;
+    private Date dtEmissaoReceita;
+    private String prescricao;
 }

@@ -48,18 +48,22 @@ public class ReceitaMedicaController {
     public ResponseEntity get(@PathVariable("id") Long id) {
         Optional<ReceitaMedica> receitaMedica = service.getReceitaMedicaById(id);
         if (!receitaMedica.isPresent()) {
-            return new ResponseEntity("Exame não encontrada", HttpStatus.NOT_FOUND);
+            return new ResponseEntity("Receita não encontrada", HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(receitaMedica.map(ReceitaMedicaDTO::create));
     }
 
-    @GetMapping("{id}/Paciente")
-    public ResponseEntity getMedico(@PathVariable("id") Long id) {
+    @GetMapping("{id}/pacientes")
+    public ResponseEntity getPaciente(@PathVariable("id") Long id) {
         Optional<ReceitaMedica> receitaMedica = service.getReceitaMedicaById(id);
         if (!receitaMedica.isPresent()) {
             return new ResponseEntity("Receita não encontrada", HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(receitaMedica.get().getPaciente().stream().map(PacienteDTO::create).collect(Collectors.toList()));
+        List<Paciente> pacientes = pacienteService.getPacientesByReceitaMedica(receitaMedica);
+        
+        return ResponseEntity.ok(pacientes.stream().map(PacienteDTO::create).collect(Collectors.toList()));
+
+
     }
 
     @PostMapping()

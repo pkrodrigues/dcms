@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class MedicoDTO {
 
-    private int medico_id;
+    private int idMedico;
     private String rg;
     private String sexo;
     private String telefone;

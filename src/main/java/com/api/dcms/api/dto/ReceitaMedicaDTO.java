@@ -1,16 +1,14 @@
 package com.api.dcms.api.dto;
 
-import com.api.dcms.model.entity.Medico;
-import com.api.dcms.model.entity.Paciente;
+import java.util.Date;
+
+import org.modelmapper.ModelMapper;
+
 import com.api.dcms.model.entity.ReceitaMedica;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.modelmapper.ModelMapper;
-
-import javax.persistence.ManyToOne;
-import java.sql.Time;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -20,7 +18,7 @@ public class ReceitaMedicaDTO {
     private Long idMedico;
     private Long idPaciente;
     private Date dtEmissaoReceita;
-    private String presquicao;
+    private String prescricao;
 
     public static ReceitaMedicaDTO create(ReceitaMedica receitaMedica) {
         ModelMapper modelMapper = new ModelMapper();

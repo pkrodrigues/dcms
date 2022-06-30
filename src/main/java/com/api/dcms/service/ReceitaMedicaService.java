@@ -1,23 +1,22 @@
 package com.api.dcms.service;
 
-import com.api.dcms.model.entity.ReceitaMedica;
-import com.api.dcms.model.entity.Paciente;
-import com.api.dcms.service.PacienteService;
-import com.api.dcms.service.MedicoService;
-import com.api.dcms.model.repository.ReceitaMedicaRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.api.dcms.exception.RegraNegocioException;
+import com.api.dcms.model.entity.ReceitaMedica;
+import com.api.dcms.model.repository.ReceitaMedicaRepository;
+
 @Service
 
 public class ReceitaMedicaService {
-    private TurmaRepository repository;
+    private ReceitaMedicaRepository repository;
 
-    public ReceitaMedica(ReceitaMedicaRepository repository) {
+    public ReceitaMedicaService (ReceitaMedicaRepository repository) {
         this.repository = repository;
     }
 
@@ -30,31 +29,32 @@ public class ReceitaMedicaService {
     }
 
     @Transactional
-    public Exame salvar(ReceitaMedica receitaMedica) {
+    public ReceitaMedica salvar(ReceitaMedica receitaMedica) {
         validar(receitaMedica);
         return repository.save(receitaMedica);
     }
 
     @Transactional
     public void excluir(ReceitaMedica receitaMedica) {
-        Objects.requireNonNull(receitaMedica.getIdReceitaMedica());
+        Objects.requireNonNull(receitaMedica.getIdReceitaMed());
         repository.delete(receitaMedica);
+    }
 
-        public void validar(ReceitaMedica receitaMedica) {
+    public void validar(ReceitaMedica receitaMedica) {
 
-            if (receitaMedica.getDtEmissaoReceita()== null || receitaMedica.getDtEmissaoReceita() == 0) {
-                throw new RegraNegocioException("A Data de emissão é inválida");
-            }
-            if (receitaMedica.getPresquicao() == null || receitaMedica.getPresquicao() == 0) {
-                throw new RegraNegocioException("o preenchimento da prescrição Médica não pode estar vazio");
-            }
-            if (receitaMedica.getPaciente().getNome() == null || receitaMedica.getPaciente().getNome().trim().equals("")|| receitaMedica.getPaciente().getIdPaciente() ==0) {
-                throw new RegraNegocioException("Paciênte não encontrado");
-            }
-            if (receitaMedica.getMedico().getNome() == null || receitaMedica.getMedico().getNome().trim().equals("")|| receitaMedica.getMedico().getIdMedico() == 0) {
-                throw new RegraNegocioException("Médico não encontrado");
-            }
+        if (receitaMedica.getDtEmissaoReceita() == null) {
+            throw new RegraNegocioException("A Data de emissão é inválida");
         }
+        if (receitaMedica.getPrescricao() == null) {
+            throw new RegraNegocioException("o preenchimento da prescrição Médica não pode estar vazio");
+        }
+        if (receitaMedica.getPaciente().getNome() == null || receitaMedica.getPaciente().getNome().trim().equals("")|| receitaMedica.getPaciente().getIdPaciente() == null) {
+            throw new RegraNegocioException("Paciênte não encontrado");
+        }
+        if (receitaMedica.getMedico().getNome() == null || receitaMedica.getMedico().getNome().trim().equals("")|| receitaMedica.getMedico().getIdMedico() == null) {
+            throw new RegraNegocioException("Médico não encontrado");
+        }
+    }
     }
 
 

@@ -1,5 +1,7 @@
 package com.api.dcms.model.entity;
 
+import java.util.stream.Stream;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,6 +28,9 @@ public class Paciente extends Pessoa {
     private Long idPaciente;
     @ManyToOne
     private Convenio convenio;
+    public Stream<ReceitaMedica> stream() {
+        return null;
+    }
 
 }
 

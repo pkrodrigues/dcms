@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Administrator extends Colaborador{
+public class Funcionario extends Colaborador{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAdministrador;
