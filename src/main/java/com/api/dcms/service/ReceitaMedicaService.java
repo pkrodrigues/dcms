@@ -27,6 +27,7 @@ public class ReceitaMedicaService {
     public Optional<ReceitaMedica> getReceitaMedicaById(Long id) {
         return repository.findById(id);
     }
+    
 
     @Transactional
     public ReceitaMedica salvar(ReceitaMedica receitaMedica) {
@@ -48,10 +49,10 @@ public class ReceitaMedicaService {
         if (receitaMedica.getPrescricao() == null) {
             throw new RegraNegocioException("o preenchimento da prescrição Médica não pode estar vazio");
         }
-        if (receitaMedica.getPaciente().getNome() == null || receitaMedica.getPaciente().getNome().trim().equals("")|| receitaMedica.getPaciente().getIdPaciente() == null) {
+        if (receitaMedica.getPaciente() == null || receitaMedica.getPaciente().equals("")|| receitaMedica.getPaciente().getIdPaciente() == null) {
             throw new RegraNegocioException("Paciênte não encontrado");
         }
-        if (receitaMedica.getMedico().getNome() == null || receitaMedica.getMedico().getNome().trim().equals("")|| receitaMedica.getMedico().getIdMedico() == null) {
+        if (receitaMedica.getMedico() == null || receitaMedica.getMedico().equals("")|| receitaMedica.getMedico().getIdMedico() == null) {
             throw new RegraNegocioException("Médico não encontrado");
         }
     }

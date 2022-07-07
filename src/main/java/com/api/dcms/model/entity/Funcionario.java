@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 public class Funcionario extends Colaborador{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAdministrador;
+    private Long idFuncionario;
     private String tipoContratacao;
 
     @ManyToOne

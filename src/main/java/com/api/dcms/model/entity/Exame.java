@@ -41,9 +41,7 @@ public class Exame {
     private Medico medico;
     @ManyToOne
     private Convenio convenio;
-    public boolean isPresent() {
-        return false;
-    }
+    
 
 
 
