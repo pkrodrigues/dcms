@@ -48,17 +48,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/alunos/**")
+                .antMatchers("/api/v1/agenda/**")
                 .hasAnyRole("USER", "ADMIN")
-                .antMatchers("/api/v1/cursos/**")
+                .antMatchers("/api/v1/consultas/**")
                 .hasAnyRole("USER", "ADMIN")
-                .antMatchers("/api/v1/disciplinas/**")
+                .antMatchers("/api/v1/convenio/**")
+                .hasAnyRole("USER", "ADMIN")
+                .antMatchers("/api/v1/paciente")
                 .hasRole("ADMIN")
-                .antMatchers("/api/v1/professores/**")
+                .antMatchers("/api/v1/medico/**")
                 .hasRole("ADMIN")
-                .antMatchers("/api/v1/turmas/**")
+                .antMatchers("/api/v1/secretario/**")
                 .hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/api/v1/usuarios/**")
+                .antMatchers(HttpMethod.POST, "/api/v1/usuario/**")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -69,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         ;
     }
 
-    @Override
+  /*  @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(
                 "/v2/api-docs",
@@ -78,6 +80,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/configuration/security",
                 "/swagger-ui.html",
                 "/webjars/**");
-    }
+    }*/
 }
 

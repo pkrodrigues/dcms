@@ -25,6 +25,9 @@ public class UsuarioService implements UserDetailsService {
         return repository.save(usuario);
     }
 
+//    public UserDetails loadUserByUsername(String loginUsuario) {
+//    }
+
     public  UserDetails autenticar(Usuario usuario){
         UserDetails user = loadUserByUsername(usuario.getLogin());
         boolean senhasBatem = encoder.matches(usuario.getSenha(), user.getPassword());
