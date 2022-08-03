@@ -1,7 +1,10 @@
 package com.api.dcms.security;
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> cef587aa001fd2eeb9524b6453a24893acffd81d
 import com.api.dcms.service.UsuarioService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,8 +20,13 @@ import java.io.IOException;
 
 public class JwtAuthFilter extends OncePerRequestFilter {
 
+<<<<<<< HEAD
     private JwtService jwtService;
     private UsuarioService usuarioService;
+=======
+    private final JwtService jwtService;
+    private final UsuarioService usuarioService;
+>>>>>>> cef587aa001fd2eeb9524b6453a24893acffd81d
 
     public JwtAuthFilter( JwtService jwtService, UsuarioService usuarioService ) {
         this.jwtService = jwtService;
@@ -50,4 +58,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> cef587aa001fd2eeb9524b6453a24893acffd81d

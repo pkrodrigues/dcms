@@ -63,5 +63,9 @@ public class JwtService {
     public String obterLoginUsuario(String token) throws ExpiredJwtException{
         return (String) obterClaims(token).getSubject();
     }
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> cef587aa001fd2eeb9524b6453a24893acffd81d

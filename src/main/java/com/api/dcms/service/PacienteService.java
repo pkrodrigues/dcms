@@ -33,7 +33,7 @@ public class PacienteService {
     // public List<Paciente> getPacientesByReceitaMedica(Optional<ReceitaMedica> receitaMedica) {
     //     return repository.findByReceitaMedica(receitaMedica);
     // }
-    
+
 
     public void validar(Paciente paciente) {
         if (paciente.getNome() == null || paciente.getNome().trim().equals("")) {
@@ -51,4 +51,6 @@ public class PacienteService {
         Objects.requireNonNull(paciente.getIdPaciente());
         repository.delete(paciente);
     }
+
+
 }
