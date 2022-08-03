@@ -1,14 +1,14 @@
 package com.api.dcms.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
-
 import com.api.dcms.exception.RegraNegocioException;
 import com.api.dcms.model.entity.Secretaria;
 import java.util.Objects;
 import com.api.dcms.model.repository.SecretariaRepository;
+
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SecretariaService {
@@ -34,5 +34,16 @@ public class SecretariaService {
         if(secretaria.getCpf() == null || secretaria.getCpf().trim().equals("")){
             throw new RegraNegocioException("CPF inválido");
         }
+    }
+
+    @Transactional
+    public Secretaria salvar(Secretaria secretaria){
+        validar(secretaria);
+        return repository.save(secretaria);
+    }
+    @Transactional
+    public void excluir(Secretaria secretaria) {
+        Objects.requireNonNull(secretaria.getIdSecretaria());
+        repository.delete(secretaria);
     }
 }

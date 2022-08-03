@@ -47,8 +47,7 @@ public class CargoController {
             @ApiResponse(code = 200, message = "Cargo ok"),
             @ApiResponse(code = 404, message = "Cargo não encontrado")
     })
-
-    public ResponseEntity get(@PathVariable("id") Long id) {
+    public ResponseEntity get(@PathVariable("id") @ApiParam("ID do cargo") Long id) {
         Optional<Cargo> cargo = service.getCargoById(id);
         if (!cargo.isPresent()) {
             return new ResponseEntity("Cargo não encontrado", HttpStatus.NOT_FOUND);
@@ -57,7 +56,7 @@ public class CargoController {
     }
 
     @GetMapping("{id}/funcionario")
-    public ResponseEntity getFuncionario(@PathVariable("id") Long id) {
+    public ResponseEntity getFuncionario(@PathVariable("id") @ApiParam("ID do funcionário") Long id) {
         Optional<Cargo> cargo = service.getCargoById(id);
         if (!cargo.isPresent()) {
             return new ResponseEntity("Cargo não encontrado", HttpStatus.NOT_FOUND);
@@ -71,7 +70,6 @@ public class CargoController {
             @ApiResponse(code = 201, message = "Cargo salvo com sucesso"),
             @ApiResponse(code = 400, message = "Erro ao salvar o cargo")
     })
-
     public ResponseEntity post(CargoDTO dto) {
         try {
             Cargo cargo = converter(dto);
@@ -87,7 +85,6 @@ public class CargoController {
             @ApiResponse(code = 201, message = "Alterações salvas com sucesso"),
             @ApiResponse(code = 400, message = "Erro ao alterar o cargo")
     })
-
     public ResponseEntity atualizar(@PathVariable("id") Long id, CargoDTO dto) {
         if (!service.getCargoById(id).isPresent()) {
             return new ResponseEntity("Cargo não encontrado", HttpStatus.NOT_FOUND);
@@ -107,7 +104,6 @@ public class CargoController {
             @ApiResponse(code = 201, message = "Cargo deletado com sucesso"),
             @ApiResponse(code = 400, message = "Erro ao deletar o cargo")
     })
-
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<Cargo> cargo = service.getCargoById(id);
         if (!cargo.isPresent()) {

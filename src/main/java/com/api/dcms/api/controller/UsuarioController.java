@@ -6,6 +6,9 @@ import com.api.dcms.exception.SenhaInvalidaException;
 import com.api.dcms.model.entity.Usuario;
 import com.api.dcms.security.JwtService;
 import com.api.dcms.service.UsuarioService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +26,11 @@ public class UsuarioController {
     private final JwtService jwtService;
 
     @PostMapping
+    @ApiOperation("Salva uma nova senha para o Usuário")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Senha salva com sucesso"),
+            @ApiResponse(code = 400, message = "Erro")
+    })
     @ResponseStatus(HttpStatus.CREATED)
     public Usuario salvar(@RequestBody Usuario usuario){
         String senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
@@ -31,6 +39,11 @@ public class UsuarioController {
     }
 
     @PostMapping("/auth")
+    @ApiOperation("Token")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Token gerado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro")
+    })
     public TokenDTO autenticar(@RequestBody CredenciaisDTO credenciais){
         try{
             Usuario usuario = Usuario.builder()

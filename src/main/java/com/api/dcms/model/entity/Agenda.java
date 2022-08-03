@@ -24,11 +24,12 @@ public class Agenda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAgenda;
 
+    private Long idAgenda;
     private Date data;
     private Time horario;
     private String Observacao;
+
     @OneToOne
     private Convenio convenio;
     @ManyToOne

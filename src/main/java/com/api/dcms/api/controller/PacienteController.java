@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,7 +61,12 @@ public class PacienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable("id") Long id) {
+    @ApiOperation("Obter detalhes de um Paciente")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Paciente ok"),
+            @ApiResponse(code = 404, message = "Paciente não encontrado")
+    })
+    public ResponseEntity get(@PathVariable("id") @ApiParam("ID do paciente") Long id) {
         Optional<Paciente> paciente = service.getPacienteById(id);
         if (!paciente.isPresent()) {
             return new ResponseEntity("Paciente não encontrado", HttpStatus.NOT_FOUND);
@@ -66,6 +75,11 @@ public class PacienteController {
     }
 
     @PostMapping()
+    @ApiOperation("Cadastrar um novo Paciênte")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Cadastro realizado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao cadastrar o novo Paciênte")
+    })
     public ResponseEntity post(PacienteDTO dto) {
         try {
             Paciente paciente = converter(dto);
@@ -77,6 +91,11 @@ public class PacienteController {
     }
 
     @PutMapping("{id}")
+    @ApiOperation("Alterar detalhes")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Alterações salvas com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao realizar a alteração")
+    })
     public ResponseEntity atualizar(@PathVariable("id") Long id, PacienteDTO dto) {
         if (!service.getPacienteById(id).isPresent()) {
             return new ResponseEntity("Paciente não encontrado", HttpStatus.NOT_FOUND);
@@ -92,6 +111,11 @@ public class PacienteController {
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation("Deletar Paciente")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = " Paciente deletado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao deletar o paciente")
+    })
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<Paciente> paciente = service.getPacienteById(id);
         if (!paciente.isPresent()) {
@@ -106,4 +130,3 @@ public class PacienteController {
     }
 
 }
-        

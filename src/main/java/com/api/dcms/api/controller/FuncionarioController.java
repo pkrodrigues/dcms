@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +45,12 @@ public class FuncionarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable("id") Long id) {
+    @ApiOperation("Obter detalhes de um funcionário")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Funcionário ok"),
+            @ApiResponse(code = 404, message = "Funcionário não encontrado")
+    })
+    public ResponseEntity get(@PathVariable("id") @ApiParam("ID do funcionário") Long id) {
         Optional<Funcionario> funcionario = service.getFuncionarioById(id);
         if (!funcionario.isPresent()) {
             return new ResponseEntity("Funcionário não encontrado", HttpStatus.NOT_FOUND);
@@ -50,6 +59,11 @@ public class FuncionarioController {
     }
 
     @PostMapping()
+    @ApiOperation("Salva um novo Funcionário")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Novo funcionário salvo com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao salvar o novo funcionário")
+    })
     public ResponseEntity post(FuncionarioDTO dto) {
         try {
             Funcionario funcionario = converter(dto);
@@ -63,6 +77,11 @@ public class FuncionarioController {
 
 
     @PutMapping("{id}")
+    @ApiOperation("Alterar detalhes")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Alterações salvas com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao alterar")
+    })
     public ResponseEntity atualizar(@PathVariable("id") Long id, FuncionarioDTO dto) {
         if (!service.getFuncionarioById(id).isPresent()) {
             return new ResponseEntity("Funcionário não encontrado", HttpStatus.NOT_FOUND);
@@ -78,6 +97,11 @@ public class FuncionarioController {
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation("Deletar")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Deletado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao deletar")
+    })
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<Funcionario> funcionario = service.getFuncionarioById(id);
         if (!funcionario.isPresent()) {

@@ -1,10 +1,12 @@
 package com.api.dcms.api.controller;
-
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,7 +48,12 @@ public class ExameController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable("id") Long id) {
+    @ApiOperation("Obter detalhes de um exame")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Exame ok"),
+            @ApiResponse(code = 404, message = "Exame não encontrado")
+    })
+    public ResponseEntity get(@PathVariable("id") @ApiParam("ID do exame") Long id) {
         Optional<Exame> exame = service.getExameById(id);
         if (!exame.isPresent()) {
             return new ResponseEntity("Exame não encontrada", HttpStatus.NOT_FOUND);
@@ -54,9 +61,14 @@ public class ExameController {
         return ResponseEntity.ok(exame.map(ExameDTO::create));
     }
 
-   
+
 
     @PostMapping()
+    @ApiOperation("Salva um novo exame")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Exame salvo com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao salvar o exame")
+    })
     public ResponseEntity post(ExameDTO dto) {
         try {
             Exame exame = converter(dto);
@@ -68,6 +80,11 @@ public class ExameController {
     }
 
     @PutMapping("{id}")
+    @ApiOperation("Alterar detalhes do exame")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Alterações salvas com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao alterar o exame")
+    })
     public ResponseEntity atualizar(@PathVariable("id") Long id, ExameDTO dto) {
         if (!service.getExameById(id).isPresent()) {
             return new ResponseEntity("Exame não encontrado", HttpStatus.NOT_FOUND);
@@ -83,6 +100,11 @@ public class ExameController {
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation("Deletar o exame")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Exame deletado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao deletar o exame")
+    })
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<Exame> exame = service.getExameById(id);
         if (!exame.isPresent()) {
@@ -126,5 +148,3 @@ public class ExameController {
         return exame;
     }
 }
-
-

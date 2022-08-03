@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +49,12 @@ public class ReceitaMedicaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable("id") Long id) {
+    @ApiOperation("Obter detalhes de uma receita médica")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Receita ok"),
+            @ApiResponse(code = 404, message = "Receita não encontrado")
+    })
+    public ResponseEntity get(@PathVariable("id") @ApiParam("ID da receita médica") Long id) {
         Optional<ReceitaMedica> receitaMedica = service.getReceitaMedicaById(id);
         if (!receitaMedica.isPresent()) {
             return new ResponseEntity("Receita não encontrada", HttpStatus.NOT_FOUND);
@@ -67,6 +76,11 @@ public class ReceitaMedicaController {
     }*/
 
     @PostMapping()
+    @ApiOperation("Salva uma nova receita")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Receita salva com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao salvar a receita")
+    })
     public ResponseEntity post(ReceitaMedicaDTO dto) {
         try {
             ReceitaMedica receitaMedica = converter(dto);
@@ -78,6 +92,11 @@ public class ReceitaMedicaController {
     }
 
     @PutMapping("{id}")
+    @ApiOperation("Alterar detalhes")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Alterações salvas com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao alterar")
+    })
     public ResponseEntity atualizar(@PathVariable("id") Long id, ReceitaMedicaDTO dto) {
         if (!service.getReceitaMedicaById(id).isPresent()) {
             return new ResponseEntity("Receita não encontrada", HttpStatus.NOT_FOUND);
@@ -93,6 +112,11 @@ public class ReceitaMedicaController {
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation("Deletar")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Deletado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao deletar")
+    })
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<ReceitaMedica> receitaMedica = service.getReceitaMedicaById(id);
         if (!receitaMedica.isPresent()) {
@@ -128,5 +152,3 @@ public class ReceitaMedicaController {
         return receitaMedica;
     }
 }
-
-

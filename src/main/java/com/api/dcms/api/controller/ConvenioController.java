@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +32,7 @@ import lombok.RequiredArgsConstructor;
 
 public class ConvenioController {
     private final ConvenioService service;
-    
+
     private Convenio converter(ConvenioDTO dto){
         ModelMapper modelMapper = new ModelMapper();
         Convenio convenio = modelMapper.map(dto, Convenio.class);
@@ -42,7 +46,12 @@ public class ConvenioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable("id") Long id) {
+    @ApiOperation("Obter detalhes de um convênio")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Convênio ok"),
+            @ApiResponse(code = 404, message = "Convênio não encontrado")
+    })
+    public ResponseEntity get(@PathVariable("id") @ApiParam("ID do convênio") Long id) {
         Optional<Convenio> convenio = service.getConvenioById(id);
         if (!convenio.isPresent()) {
             return new ResponseEntity("Convenio não encontrado", HttpStatus.NOT_FOUND);
@@ -50,7 +59,13 @@ public class ConvenioController {
         return ResponseEntity.ok(convenio.map(ConvenioDTO::create));
     }
 
-    @PostMapping
+
+    @PostMapping()
+    @ApiOperation("Salva um novo convênio")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Convênio salvo com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao salvar o convênio")
+    })
     public ResponseEntity post(ConvenioDTO dto) {
         try {
             Convenio convenio = converter(dto);
@@ -63,6 +78,11 @@ public class ConvenioController {
     }
 
     @PutMapping("{id}")
+    @ApiOperation("Alterar detalhes do convenio")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Alterações salvas com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao alterar o convênio")
+    })
     public ResponseEntity atualizar(@PathVariable("id") Long id, ConvenioDTO dto) {
         if (!service.getConvenioById(id).isPresent()) {
             return new ResponseEntity("Convenio não encontrado", HttpStatus.NOT_FOUND);
@@ -78,6 +98,11 @@ public class ConvenioController {
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation("Deletar o convênio")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Convênio deletado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao deletar o convênio")
+    })
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<Convenio> convenio = service.getConvenioById(id);
         if (!convenio.isPresent()) {
@@ -91,4 +116,3 @@ public class ConvenioController {
         }
     }
 }
-
