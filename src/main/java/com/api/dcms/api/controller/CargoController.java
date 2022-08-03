@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import io.swagger.annotations.*;
 import com.api.dcms.api.dto.FuncionarioDTO;
 import com.api.dcms.api.dto.CargoDTO;
 import com.api.dcms.exception.RegraNegocioException;
@@ -41,8 +41,13 @@ public class CargoController {
         return ResponseEntity.ok(cargo.stream().map(CargoDTO::create).collect(Collectors.toList()));
     }
 
-
     @GetMapping("/{id}")
+    @ApiOperation("Obter detalhes de um cargo")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Cargo ok"),
+            @ApiResponse(code = 404, message = "Cargo não encontrado")
+    })
+
     public ResponseEntity get(@PathVariable("id") Long id) {
         Optional<Cargo> cargo = service.getCargoById(id);
         if (!cargo.isPresent()) {
@@ -60,8 +65,13 @@ public class CargoController {
         List<Funcionario> funcionario = funcionarioService.getFuncionarioByCargo(cargo);
         return ResponseEntity.ok(funcionario.stream().map(FuncionarioDTO::create).collect(Collectors.toList()));
     }
-
     @PostMapping()
+    @ApiOperation("Salva um novo cargo")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Cargo salvo com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao salvar o cargo")
+    })
+
     public ResponseEntity post(CargoDTO dto) {
         try {
             Cargo cargo = converter(dto);
@@ -71,8 +81,13 @@ public class CargoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    @PutMapping()
+    @ApiOperation("Alterar detalhes do cargo")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Alterações salvas com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao alterar o cargo")
+    })
 
-    @PutMapping("{id}")
     public ResponseEntity atualizar(@PathVariable("id") Long id, CargoDTO dto) {
         if (!service.getCargoById(id).isPresent()) {
             return new ResponseEntity("Cargo não encontrado", HttpStatus.NOT_FOUND);
@@ -86,8 +101,13 @@ public class CargoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    @DeleteMapping()
+    @ApiOperation("Deletar o cargo")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Cargo deletado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao deletar o cargo")
+    })
 
-    @DeleteMapping("{id}")
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<Cargo> cargo = service.getCargoById(id);
         if (!cargo.isPresent()) {

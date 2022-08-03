@@ -64,4 +64,3 @@ public class JwtService {
         return (String) obterClaims(token).getSubject();
     }
 }
-
